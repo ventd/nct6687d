@@ -5,3 +5,8 @@ CLEAN="make -C ${kernel_source_dir} M=${dkms_tree}/${PACKAGE_NAME}/${PACKAGE_VER
 BUILT_MODULE_NAME[0]="nct6687"
 DEST_MODULE_LOCATION[0]="/kernel/drivers/hwmon/"
 AUTOINSTALL="yes"
+
+# ventd-fork hooks: drop in a blacklist for the conflicting in-tree
+# nct6683 driver so this OOT module wins on boot. See VENTD.md.
+POST_INSTALL="scripts/dkms-postinst.sh"
+PRE_REMOVE="scripts/dkms-prerm.sh"
